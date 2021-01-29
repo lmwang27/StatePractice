@@ -7,6 +7,18 @@ function App() {
     email: ""
   });
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setContact((preValue) => {
+      if (name === "fName") {
+        return { fName: value, lName: preValue.lName, email: preValue.email };
+      } else if (name === "lName") {
+        return { fName: preValue.fName, lName: value, email: preValue.email };
+      } else {
+        return { fName: preValue.fName, lName: preValue.lName, email: value };
+      }
+    });
+  }
   return (
     <div className="container">
       <h1>
@@ -14,9 +26,24 @@ function App() {
       </h1>
       <p>{contact.email}</p>
       <form>
-        <input name="fName" placeholder="First Name" />
-        <input name="lName" placeholder="Last Name" />
-        <input name="email" placeholder="Email" />
+        <input
+          name="fName"
+          onChange={handleChange}
+          placeholder="First Name"
+          //value={contact.fName}
+        />
+        <input
+          name="lName"
+          onChange={handleChange}
+          placeholder="Last Name"
+          //value={contact.lName}
+        />
+        <input
+          name="email"
+          onChange={handleChange}
+          placeholder="Email"
+          //value={contact.email}
+        />
         <button>Submit</button>
       </form>
     </div>
